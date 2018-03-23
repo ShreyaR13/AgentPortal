@@ -25,7 +25,7 @@
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 card grid-item" data-toggle="modal" data-target="#show-form-{{ $member->id }}"
         style="cursor: pointer !important;">
         <div class="thumbnail">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCOAHZijR7fAnilX0HexhHRTRu0BKXehxPlvYXxodTQD_LIH3B2w" class="">
+          <img src="{{ URL::asset('img/user.png') }}" class="">
           <div class="caption">
             <h3 id="thumbnail-label">{{$member->name}}</h3>
             <p>Email: {{$member->email}}</p>

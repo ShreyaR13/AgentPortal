@@ -46,6 +46,14 @@
         {{ Form::radio('interested', isset($member) ? $member->interested : "") }}
         {{Form::label('interested', 'No')}}
     </div>
+
+    <div class="form-group">
+        {{Form::label('countriesAutoInput', 'Country')}}
+  	<div class="auto">
+  			<input type="text" class="form-control" id="countriesAutoInput" name='countriesAutoInput', placeholder="Enter Country">
+  	</div>
+  	</div>
+
     <div class="form-group" style="margin:20px 0px;">
       {{Form::label('state', 'State')}}
       {{Form::text('state', isset($member) ? $member->state : "", ['class' => 'form-control', 'id' => 'auto1', 'placeholder' => 'Enter US State'])}}
