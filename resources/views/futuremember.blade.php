@@ -13,6 +13,7 @@
     <div class="form-group">
         {{Form::label('name', 'Name')}}
         {{Form::text('name', isset($member) ? $member->name : "", ['class' => 'form-control', 'placeholder' => 'Enter Name'])}}
+
     </div>
     <div class="form-group">
         {{Form::label('email', 'E-mail Address')}}
@@ -47,7 +48,7 @@
     </div>
     <div class="form-group" style="margin:20px 0px;">
       {{Form::label('state', 'State')}}
-      {{Form::text('state', isset($member) ? $member->state : "", ['class' => 'form-control', 'placeholder' => 'Enter US State'])}}
+      {{Form::text('state', isset($member) ? $member->state : "", ['class' => 'form-control', 'id' => 'auto1', 'placeholder' => 'Enter US State'])}}
 		</div>
     <div class="form-group">
       {{Form::label('city', 'City')}}

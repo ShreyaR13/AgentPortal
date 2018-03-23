@@ -1,4 +1,4 @@
-
+<!--genModal to display user detaisl in a Modal -->
 @if($member)
 <div class="modal fade" id="show-form-{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">

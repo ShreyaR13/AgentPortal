@@ -7,29 +7,28 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/futuremember', function () {
+Route::get('/futuremember', function () {             //Route to add a new Future Member
     return view('futuremember');
 });
 
-Route::post('/futuremember/submit', 'FutureMemberController@submit');
+Route::post('/futuremember/submit', 'FutureMemberController@submit'); //Route to add a Future Member
 
-Route::get('/update/{id}', 'FutureMemberController@edit');
+Route::get('/update/{id}', 'FutureMemberController@edit');  //Route to fetch member details based on the user_id selected
 
-Route::get('/member', 'FutureMemberController@index');  //Display all members->which is what we want for displaying all members->switch off!!!
+Route::get('/member', 'FutureMemberController@index');  //Route to display all members in the system
 
-Route::get('/show/{id}', 'FutureMemberController@show');
+//Route::get('/show/{id}', 'FutureMemberController@show');
 
-Route::get('/member/index', 'OnlyOwnController@index');   //Display members added by particular user
+Route::get('/member/index', 'OnlyOwnController@index');   //Route to display members added by particular user
 
-Route::get('/showdata/{id}', 'FutureMemberController@showdata');
+//Route::get('/showdata/{id}', 'FutureMemberController@showdata');
 
-Route::get('/edit/{id}', 'FutureMemberController@edit');
+//Route::get('/edit/{id}', 'FutureMemberController@edit');  //Route to fetch member details based on the user_id selected
 
-Route::put('/update/{id}', 'FutureMemberController@update');
+Route::put('/update/{id}', 'FutureMemberController@update');  //Route to update the Future Member Details using update method
 
-Route::put('/destroy/{id}', 'FutureMemberController@destroy');
+Route::put('/destroy/{id}', 'FutureMemberController@destroy');  //Route to delete member
 
-//Route::post('/contacttime/submit', 'ContactTimeController@submit');
 
 Route::auth();
 

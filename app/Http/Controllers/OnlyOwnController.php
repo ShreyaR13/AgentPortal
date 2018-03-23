@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\User;
+use App\User;   //Using User Model to build relationship between FutureMembers and Users
 
 class OnlyOwnController extends Controller
 {
@@ -21,12 +21,9 @@ class OnlyOwnController extends Controller
         $this->middleware('auth');
     }
 
+  //Index Function to display members created by logged in user
   public function index()
   {
-    // $member = FutureMember::orderBy('id', 'desc')->paginate(3);
-    // //$member = FutureMember::orderBy('created_at', 'desc')->get();
-    // return view('member')->with('member', $member);
-
       $user_id = auth()->user()->id;
       $user = User::find($user_id);
       return view('onlyown')->with('member', $user->member);

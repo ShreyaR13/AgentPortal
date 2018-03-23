@@ -11,14 +11,17 @@ use App\FutureMember;
 class FutureMemberController extends Controller
 {
 
+    //Submit Function to add a new FututreMember
     public function submit(Request $request){
-    $this->validate($request, [
+    $this->validate($request, [     //Validations for required fields in the form
       'name' => 'required',
       'email' => 'required',
-      'contact' => 'required'
+      'contact' => 'required',
+      'interested' => 'required'
     ]);
 
-    //add member
+
+    //Add FutureMember to the DB
     $member = new FutureMember;
     $member->name = $request->input('name');
     $member->email = $request->input('email');
@@ -31,7 +34,7 @@ class FutureMemberController extends Controller
     //SAVE Member
     $member->save();
 
-    //redirect
+    //Redirect to Dashboard after FutureMember is added
     return redirect('/home')->with('success', 'Future Member Added');
     }
 
@@ -50,6 +53,8 @@ class FutureMemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //
     public function index()
     {
       $member = FutureMember::orderBy('id', 'desc')->paginate(3);
