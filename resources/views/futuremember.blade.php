@@ -46,24 +46,23 @@
         {{ Form::radio('interested', isset($member) ? $member->interested : "") }}
         {{Form::label('interested', 'No')}}
     </div>
-
+      
     <div class="form-group">
-        {{Form::label('countriesAutoInput', 'Country')}}
-  	<div class="auto">
-  			<input type="text" class="form-control" id="countriesAutoInput" name='countriesAutoInput', placeholder="Enter Country">
-  	</div>
-  	</div>
-
-    <div class="form-group" style="margin:20px 0px;">
-      {{Form::label('state', 'State')}}
-      {{Form::text('state', isset($member) ? $member->state : "", ['class' => 'form-control', 'id' => 'auto1', 'placeholder' => 'Enter US State'])}}
-		</div>
+            {{Form::label('countryInput', 'Country')}}
+            <select class="combobox input-large form-control" id='countryInput' name="normal">
+              <option value="" selected="selected">Select a Country</option>
+            </select>
+    </div>
+    
     <div class="form-group">
-      {{Form::label('city', 'City')}}
-      {{Form::text('city', isset($member) ? $member->city : "", ['class' => 'form-control', 'placeholder' => 'Enter City'])}}
+            {{Form::label('stateInput', 'State')}}
+            <select class="combobox input-large form-control" id='stateInput'>
+              <option value="" selected="selected">Select a State</option>
+            </select>
     </div>
 
       {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
 {!! Form::close() !!}
 </div>
+
 @endsection

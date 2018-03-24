@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="{{ URL::asset('css/jquery.autocomplete.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-combobox.css') }}" />
+
+
 
     <style>
         body {
@@ -136,11 +139,11 @@ input:checked + .slider:before {
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
     <script type="text/javascript" src="{{ URL::asset('js/jquery.autocomplete.js') }}"></script>
-
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap-combobox.js') }}"></script>
 
     <script>
   $(document).ready(function(){
@@ -159,34 +162,89 @@ input:checked + .slider:before {
         });
 
       $("#memberdetails").on("show.bs.modal", function(e) {
-        debugger;
         var id = $(e.relatedTarget).data('target-id');
         $.get('/admin/society/' + id, function( data ) {
         alert(data);
           $(".modal-body").html(data);
         });
       });
-      var countriesList = [
-        'Australia',
-        'Austria',
-        'Canada',
-        'Denmark',
-        'Finland',
-        'India',
-        'Netherlands',
-        'New Zealand',
-        'Norway',
-        'Sweden',
-        'Switzerland',
-        'United Kingdom of Great Britain and Northern Ireland',
-        'United States of America'
-      ];
-      $('#countriesAutoInput').autocomplete({
-      	source:[countriesList]
-      });
 
-  });
+    $.ajax({
+        url: "data/getCountries",
+        async: false,
+        method: "GET",
+        // headers: { "Accept": "application/json; odata=verbose" },
+        success: function (data) {
+            // parse the results 
+            console.log('-----------getCountries------------');
+        console.log(data);
+        $.each(data, function(i, el) 
+        {
+            $('#countryInput').append(new Option(el, i));
+            
+        });
+        $('#countryInput').trigger("chosen:updated");
+    }
+    });
+
+    // jQuery.ajaxSetup({async:false});
+
+    // $.get("data/getCountries", function(data) {
+    //     console.log('-----------getCountries------------');
+    //     console.log(data);
+    //     $.each(data, function(i, el) 
+    //     {
+    //         $('#countryInput').append(new Option(el, i));
+            
+    //     });
+    //     $('#countryInput').trigger("chosen:updated");
+    // });
+    
+    // jQuery.ajaxSetup({async:true});
+
+    $("#countryInput").change(function(e) {
+        jQuery.ajaxSetup({async:false});
+        e.preventDefault();
+        var country_code = this.value;
+        if(country_code){
+
+                $.ajax({
+                    url: "data/getStates/" + country_code,
+                    async: false,
+                    method: "GET",
+                    // headers: { "Accept": "application/json; odata=verbose" },
+                    success: function (data) {
+                        // parse the results 
+                        console.log('-----------getCountries------------');
+                    console.log(data);
+                    $.each(data, function(i, el) 
+                    {
+                        $('#stateInput').append(new Option(el, i));
+                        console.log(el + '---' + i)
+                    });
+                    $('#stateInput').trigger("chosen:updated");
+                    }
+                });
+
+            // $.get("data/getStates/" + country_code, function(data) {
+            //     console.log('-----------getStates------------');
+            //     console.log(data);
+            //     $.each(data, function(i, el) 
+            //     {
+            //         $('#stateInput').append(new Option(el, i));
+            //         console.log(el + '---' + i)
+            //     });
+            // $('#stateInput').trigger("chosen:updated");
+            // });
+        }
+        jQuery.ajaxSetup({async:true});
+    });
+
+    $('.combobox').combobox();
+});
 
   </script>
+
+
 </body>
 </html>

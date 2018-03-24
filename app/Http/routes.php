@@ -29,6 +29,9 @@ Route::put('/update/{id}', 'FutureMemberController@update');  //Route to update 
 
 Route::put('/destroy/{id}', 'FutureMemberController@destroy');  //Route to delete member
 
+Route::get('/data/getCountries', 'CountriesController@getAllCountries');
+
+Route::get('/data/getStates/{id}', 'StatesController@getAllStates');
 
 Route::auth();
 

@@ -124,8 +124,7 @@ class FutureMemberController extends Controller
      */
     public function edit($id)
     {
-          $member = FutureMember::find($id);
-          return view('futuremember')->with('member', $member);
+
     }
 
     /**

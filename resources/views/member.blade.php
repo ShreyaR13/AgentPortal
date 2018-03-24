@@ -12,7 +12,6 @@
     </label>
 
     @if(count($member) > 0)
-
     @php
     $copyOfMember = $member
     @endphp
