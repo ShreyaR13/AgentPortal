@@ -49,7 +49,7 @@
       
     <div class="form-group">
             {{Form::label('countryInput', 'Country')}}
-            <select class="combobox input-large form-control" id='countryInput' name="normal">
+            <select class="combobox input-large form-control" id='countryInput'>
               <option value="" selected="selected">Select a Country</option>
             </select>
     </div>
@@ -60,6 +60,7 @@
               <option value="" selected="selected">Select a State</option>
             </select>
     </div>
+
 
       {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}
 {!! Form::close() !!}

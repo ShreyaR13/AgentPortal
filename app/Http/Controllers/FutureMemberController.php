@@ -11,7 +11,7 @@ use App\FutureMember;
 class FutureMemberController extends Controller
 {
 
-    //Submit Function to add a new FututreMember
+    //Submit Function to add a new FututreMember in DB
     public function submit(Request $request){
     $this->validate($request, [     //Validations for required fields in the form
       'name' => 'required',
@@ -21,7 +21,7 @@ class FutureMemberController extends Controller
     ]);
 
 
-    //Add FutureMember to the DB
+    //Insert FutureMember to the DB
     $member = new FutureMember;
     $member->name = $request->input('name');
     $member->email = $request->input('email');
@@ -29,7 +29,7 @@ class FutureMemberController extends Controller
     $member->interested = $request->input('interested');
     $member->state = $request->input('state');
     $member->city = $request->input('city');
-    $member->user_id = auth()->user()->id;
+    $member->user_id = auth()->user()->id;    //User ID foreign key added to the future_members table
 
     //SAVE Member
     $member->save();
@@ -54,18 +54,18 @@ class FutureMemberController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    //
+    //Function to display all the members in the system
     public function index()
     {
       $member = FutureMember::orderBy('id', 'desc')->paginate(3);
-      //$member = FutureMember::orderBy('created_at', 'desc')->get();
       return view('member')->with('member', $member);
     }
 
+    //Function to display logged in users members
     public function yourmembers()
     {
-      //$member = FutureMember::orderBy('id', 'desc')->paginate(1);
-      $member = FutureMember::orderBy('created_at', 'desc')->get();
+      //$member = FutureMember::orderBy('id', 'desc')->paginate(1); 
+      $member = FutureMember::orderBy('id', 'desc')->get();
       return view('onlyown')->with('member', $member);
     }
 
@@ -96,6 +96,7 @@ class FutureMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //Not in use anymore!!!
     public function show($id)
     {
         $member = FutureMember::find($id);
@@ -108,6 +109,7 @@ class FutureMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //Not in use anymore!!!
     public function showdata($id)
     {
         $member = FutureMember::find($id);
@@ -124,7 +126,8 @@ class FutureMemberController extends Controller
      */
     public function edit($id)
     {
-
+      $member = FutureMember::find($id);
+      return view('futuremember')->with('member', $member);
     }
 
     /**
@@ -139,10 +142,11 @@ class FutureMemberController extends Controller
       $this->validate($request, [
         'name' => 'required',
         'email' => 'required',
-        'contact' => 'required'
+        'contact' => 'required',
+        'interested' => 'required'
       ]);
 
-      //add member
+      //update member
       $member = FutureMember::find($id);
       $member->name = $request->input('name');
       $member->email = $request->input('email');

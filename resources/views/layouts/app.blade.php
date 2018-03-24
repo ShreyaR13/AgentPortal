@@ -146,6 +146,7 @@ input:checked + .slider:before {
     <script type="text/javascript" src="{{ URL::asset('js/bootstrap-combobox.js') }}"></script>
 
     <script>
+        //Switch to display logged in users members
   $(document).ready(function(){
       $("#onlyOwnSubmissions").change(function(val){
 
@@ -156,11 +157,13 @@ input:checked + .slider:before {
           }
       });
 
+    //display members in card
       $('[name="userCard"]').on('click', function(e) {
         var this_id = $(this).attr('user-id');
         console.log(this_id)
         });
 
+    //display member details in a Modal
       $("#memberdetails").on("show.bs.modal", function(e) {
         var id = $(e.relatedTarget).data('target-id');
         $.get('/admin/society/' + id, function( data ) {
@@ -173,74 +176,50 @@ input:checked + .slider:before {
         url: "data/getCountries",
         async: false,
         method: "GET",
-        // headers: { "Accept": "application/json; odata=verbose" },
         success: function (data) {
             // parse the results 
             console.log('-----------getCountries------------');
-        console.log(data);
-        $.each(data, function(i, el) 
-        {
-            $('#countryInput').append(new Option(el, i));
-            
-        });
-        $('#countryInput').trigger("chosen:updated");
-    }
+            console.log(data);
+            $.each(data, function(i, el) 
+            {
+                $('#countryInput').append(new Option(el, i));
+                
+            });
+            $('#countryInput').trigger("chosen:updated");
+        }
     });
 
-    // jQuery.ajaxSetup({async:false});
-
-    // $.get("data/getCountries", function(data) {
-    //     console.log('-----------getCountries------------');
-    //     console.log(data);
-    //     $.each(data, function(i, el) 
-    //     {
-    //         $('#countryInput').append(new Option(el, i));
-            
-    //     });
-    //     $('#countryInput').trigger("chosen:updated");
-    // });
-    
-    // jQuery.ajaxSetup({async:true});
-
+    $('#countryInput').combobox();
     $("#countryInput").change(function(e) {
-        jQuery.ajaxSetup({async:false});
-        e.preventDefault();
         var country_code = this.value;
         if(country_code){
-
                 $.ajax({
                     url: "data/getStates/" + country_code,
                     async: false,
                     method: "GET",
-                    // headers: { "Accept": "application/json; odata=verbose" },
                     success: function (data) {
                         // parse the results 
-                        console.log('-----------getCountries------------');
-                    console.log(data);
-                    $.each(data, function(i, el) 
-                    {
-                        $('#stateInput').append(new Option(el, i));
-                        console.log(el + '---' + i)
-                    });
-                    $('#stateInput').trigger("chosen:updated");
+                        console.log('-----------getStates------------');
+                        console.log(data);
+                        if(data){
+                            $('#stateInput').empty()
+                            $('#stateInput').append('<option value="" selected="selected">Select a State</option>');
+                            $.each(data, function(i, el) 
+                            {
+                                $('#stateInput').append(new Option(el, i));
+                                console.log(el + '---' + i)
+                            });
+                            $('#stateInput').trigger("chosen:updated");
+                        }
+                        
                     }
                 });
-
-            // $.get("data/getStates/" + country_code, function(data) {
-            //     console.log('-----------getStates------------');
-            //     console.log(data);
-            //     $.each(data, function(i, el) 
-            //     {
-            //         $('#stateInput').append(new Option(el, i));
-            //         console.log(el + '---' + i)
-            //     });
-            // $('#stateInput').trigger("chosen:updated");
-            // });
         }
-        jQuery.ajaxSetup({async:true});
     });
 
-    $('.combobox').combobox();
+    
+
+    
 });
 
   </script>
