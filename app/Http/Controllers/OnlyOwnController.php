@@ -22,7 +22,7 @@ class OnlyOwnController extends Controller
     }
 
   //Index Function to display members created by logged in user
-  public function index()
+  public function getListOfOwnFutureMembers()
   {
       $user_id = auth()->user()->id;
       $user = User::find($user_id);

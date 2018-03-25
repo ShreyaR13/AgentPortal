@@ -1,3 +1,4 @@
+{{--  View page to add new future ember to DB  --}}
 @extends('layouts.app')
 
 @section('content')
@@ -21,45 +22,49 @@
     </div>
     <div class="form-group">
         {{Form::label('contact', 'Contact Number')}}
-        {{Form::number('contact', isset($member) ? $member->contact : "", ['class' => 'form-control', 'placeholder' => 'Enter Contact Number'])}}
-    </div>
-
-    <div class="form-group">
-        {{Form::label('contacttime', 'Best Time to Reach:')}}
-        <br>
-        {{ Form::checkbox('checkbox1', '', false, ['class' => 'field', 'name' => 'contacttime[]']) }}
-        {{Form::label('checkbox', 'Morning')}}
-        <br>
-        {{ Form::checkbox('checkbox1', '', false, ['class' => 'field', 'name' => 'contacttime[]']) }}
-        {{Form::label('checkbox', 'Afternoon')}}
-        <br>
-        {{ Form::checkbox('checkbox1', '', false, ['class' => 'field', 'name' => 'contacttime[]']) }}
-        {{Form::label('checkbox', 'Evening')}}
+        {{Form::text('contact', isset($member) ? $member->contact : "", ['class' => 'form-control', 'placeholder' => 'Enter Contact Number'])}}
     </div>
 
     <div class="form-group">
         {{Form::label('radio', 'Interested In Conference Board Membership?')}}
         <br>
-        {{ Form::radio('interested', isset($member) ? $member->interested : "") }}
-        {{Form::label('interested', 'Yes')}}
+        {{ Form::radio('interested', isset($member) ? $member->interested : "Yes", true, ['name' => 'interested'])}}
+        {{Form::label('', 'Yes')}}
         <br>
-        {{ Form::radio('interested', isset($member) ? $member->interested : "") }}
-        {{Form::label('interested', 'No')}}
+        {{Form::radio('interested', isset($member) ? $member->interested : "No", false, ['name' => 'interested'])}}
+        {{Form::label('', 'No')}}
     </div>
       
     <div class="form-group">
             {{Form::label('countryInput', 'Country')}}
-            <select class="combobox input-large form-control" id='countryInput'>
-              <option value="" selected="selected">Select a Country</option>
-            </select>
+
+            {{Form::select('countryInput',
+            [isset($member) ? $member->countries_id : '' => isset($member) ? $member->country->country_name : 'Select a Country'],
+            null, ['class'=> 'combobox input-large form-control'])}}
     </div>
-    
+
     <div class="form-group">
             {{Form::label('stateInput', 'State')}}
-            <select class="combobox input-large form-control" id='stateInput'>
-              <option value="" selected="selected">Select a State</option>
-            </select>
+            
+            {{Form::select('stateInput', 
+            [isset($member) ? $member->states_id : '' => isset($member) ? $member->state->state_name : 'Select a State'],
+            null, ['class'=> 'combobox input-large form-control'])
+            }}
     </div>
+
+    <div class="form-group">
+            {{Form::label('contacttime', 'Best Time to Reach:')}}
+            <br>
+            
+            {{ Form::checkbox('contacttime[]', 'Morning', isset($member->contacttime->morning) ? $member->contacttime->morning : false, ['class' => 'field', 'name' => 'contacttime[]']) }}
+            {{Form::label('checkbox', 'Morning')}}
+            <br>
+            {{ Form::checkbox('contacttime[]', 'Afternoon', isset($member->contacttime->afternoon) ? $member->contacttime->afternoon : false, ['class' => 'field', 'name' => 'contacttime[]']) }}
+            {{Form::label('checkbox', 'Afternoon')}}
+            <br>
+            {{ Form::checkbox('contacttime[]', 'Evening', isset($member->contacttime->evening) ? $member->contacttime->evening : false, ['class' => 'field', 'name' => 'contacttime[]']) }}
+            {{Form::label('checkbox', 'Evening')}}
+        </div>
 
 
       {{Form::submit('Submit', ['class' => 'btn btn-primary'])}}

@@ -149,11 +149,11 @@ input:checked + .slider:before {
         //Switch to display logged in users members
   $(document).ready(function(){
       $("#onlyOwnSubmissions").change(function(val){
-
+         // debugger;
           if(this.checked){
-            window.location.replace("/member/index");
+            window.location.replace("/member/own");
           }else {
-            window.location.replace("/member");
+            window.location.replace("/member/all");
           }
       });
 
@@ -172,8 +172,8 @@ input:checked + .slider:before {
         });
       });
 
-    $.ajax({
-        url: "data/getCountries",
+$.ajax({
+        url: document.location.origin + "/data/getCountries",
         async: false,
         method: "GET",
         success: function (data) {
@@ -194,7 +194,7 @@ input:checked + .slider:before {
         var country_code = this.value;
         if(country_code){
                 $.ajax({
-                    url: "data/getStates/" + country_code,
+                    url: document.location.origin + "/data/getStates/" + country_code,
                     async: false,
                     method: "GET",
                     success: function (data) {
@@ -216,9 +216,6 @@ input:checked + .slider:before {
                 });
         }
     });
-
-    
-
     
 });
 

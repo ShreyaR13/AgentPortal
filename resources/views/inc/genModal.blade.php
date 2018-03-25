@@ -15,8 +15,8 @@
               <li class="list-group-item">Email: {{$member->email}}</li>
               <li class="list-group-item">Contact Number: {{$member->contact}}</li>
               <li class="list-group-item">Interested: {{$member->interested}}</li>
-              <li class="list-group-item">State: {{$member->state}}</li>
-              <li class="list-group-item">City: {{$member->city}}</li>
+              <li class="list-group-item">State: {{$member->country->country_name}}</li>
+              <li class="list-group-item">City: {{$member->state->state_name}}</li>
             </ul>
 
           </div>

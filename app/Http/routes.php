@@ -11,23 +11,19 @@ Route::get('/futuremember', function () {             //Route to add a new Futur
     return view('futuremember');
 });
 
-Route::post('/futuremember/submit', 'FutureMemberController@submit'); //Route to add a Future Member
+Route::post('/futuremember/submit', 'FutureMemberController@addFutureMember'); //Route to add a Future Member
 
-Route::get('/update/{id}', 'FutureMemberController@edit');  //Route to fetch member details based on the user_id selected
+Route::get('/update/{id}', 'FutureMemberController@fetchFutureMember');  //Route to fetch member details based on the user_id selected
 
-Route::get('/member', 'FutureMemberController@index');  //Route to display all members in the system
+Route::get('/member/{action}', 'FutureMemberController@getListOfFutureMembers');  //Route to display all members of the logged in the system
 
-//Route::get('/show/{id}', 'FutureMemberController@show');
+ Route::get('/member', 'FutureMemberController@getListOfAllFutureMembers');  //Route to display all members in the system
 
-Route::get('/member/index', 'OnlyOwnController@index');   //Route to display members added by particular user
+// Route::get('/member/index', 'OnlyOwnController@getListOfOwnFutureMembers');   //Route to display members added by particular user
 
-//Route::get('/showdata/{id}', 'FutureMemberController@showdata');
+Route::put('/update/{id}', 'FutureMemberController@updateFutureMember');  //Route to update the Future Member Details using update method
 
-//Route::get('/edit/{id}', 'FutureMemberController@edit');  //Route to fetch member details based on the user_id selected
-
-Route::put('/update/{id}', 'FutureMemberController@update');  //Route to update the Future Member Details using update method
-
-Route::put('/destroy/{id}', 'FutureMemberController@destroy');  //Route to delete member
+Route::put('/destroy/{id}', 'FutureMemberController@deleteFutureMember');  //Route to delete member
 
 Route::get('/data/getCountries', 'CountriesController@getAllCountries');
 

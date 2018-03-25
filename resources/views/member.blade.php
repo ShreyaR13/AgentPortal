@@ -2,12 +2,19 @@
 
 @section('content')
 
+@php
+$urlArray = explode('/', Request::url());
+$action = end($urlArray);
+$checkedValue = '';
+if($action == 'own'){
+  $checkedValue = 'checked';
+}
+@endphp
+
 <div class="container">
-  <h1>All Members</h1>
-
-
-    <label class="switch">
-      <input id='onlyOwnSubmissions' type="checkbox">
+  <h1>Members</h1>
+  <label class="switch">
+      <input id='onlyOwnSubmissions' type="checkbox" {{$checkedValue}}>
       <span class="slider round"></span>
     </label>
 
@@ -16,8 +23,7 @@
     $copyOfMember = $member
     @endphp
 
-
-
+      {{--  Display members in a card view on Member Page  --}}
       <div class="row grid">
       @foreach($member as $member)
 
@@ -42,10 +48,11 @@
       {{ $copyOfMember->links() }}
       </div>
     @else
-        <p>No Members found</p>
+        <h1>No Members found</h1>
     @endif
 
 </div>
+
 
 @foreach($copyOfMember as $copyOfMember)
     @include('inc.genModal', ['member' => $copyOfMember])
