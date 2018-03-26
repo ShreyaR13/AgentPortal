@@ -1,5 +1,7 @@
 <?php
 
+$cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
 return [
 
     /*
@@ -54,11 +56,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
+            'host' => $cleardb_url["host"],
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => substr($cleardb_url["path"],1),
+            'username' => $cleardb_url["user"],
+            'password' => $cleardb_url["pass"],
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
