@@ -1,3 +1,4 @@
+{{--  Home page to for add members and view members option  --}}
 @extends('layouts.app')
 
 @section('content')

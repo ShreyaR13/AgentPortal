@@ -1,3 +1,4 @@
+{{--  Welcome page of the Agent Portal App  --}}
 @extends('layouts.app')
 
 @section('content') 

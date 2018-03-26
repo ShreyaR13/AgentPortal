@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    //A user has many posts
+    //A user has many FutureMembers
     public function member(){
       return $this->hasMany('App\FutureMember');
     }

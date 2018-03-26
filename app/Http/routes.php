@@ -17,9 +17,7 @@ Route::get('/update/{id}', 'FutureMemberController@fetchFutureMember');  //Route
 
 Route::get('/member/{action}', 'FutureMemberController@getListOfFutureMembers');  //Route to display all members of the logged in the system
 
- Route::get('/member', 'FutureMemberController@getListOfAllFutureMembers');  //Route to display all members in the system
-
-// Route::get('/member/index', 'OnlyOwnController@getListOfOwnFutureMembers');   //Route to display members added by particular user
+ //Route::get('/member', 'FutureMemberController@getListOfAllFutureMembers');  //Route to display all members in the system
 
 Route::put('/update/{id}', 'FutureMemberController@updateFutureMember');  //Route to update the Future Member Details using update method
 

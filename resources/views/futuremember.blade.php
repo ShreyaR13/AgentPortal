@@ -1,4 +1,4 @@
-{{--  View page to add new future ember to DB  --}}
+{{--  View page to add new future member to DB  --}}
 @extends('layouts.app')
 
 @section('content')
@@ -29,10 +29,10 @@
         {{Form::label('radio', 'Interested In Conference Board Membership?')}}
         <br>
         {{ Form::radio('interested', isset($member) ? $member->interested : "Yes", true, ['name' => 'interested'])}}
-        {{Form::label('', 'Yes')}}
+        {{Form::label('interested', 'Yes')}}
         <br>
         {{Form::radio('interested', isset($member) ? $member->interested : "No", false, ['name' => 'interested'])}}
-        {{Form::label('', 'No')}}
+        {{Form::label('interested', 'No')}}
     </div>
       
     <div class="form-group">

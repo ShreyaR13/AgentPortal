@@ -17,6 +17,6 @@ class ContactTime extends Model
 
     //A member has a relationship with a contact time
     public function member(){
-        return $this->hasOne('App\FutureMember', 'contactid', 'contactid');
+        return $this->hasOne('App\FutureMember', 'contactid');
       }
 }
