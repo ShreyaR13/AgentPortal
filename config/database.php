@@ -1,7 +1,7 @@
 <?php
-
-$CLEARDB_DATABASE_URL= 'mysql://b52f60921d5f84:750811f1@us-cdbr-iron-east-05.cleardb.net/heroku_db67e7cdc5b1f92?reconnect=true';
-$cleardb_url      = parse_url($CLEARDB_DATABASE_URL);
+$cleardb_url      = parse_url(getenv("CLEARDB_DATABASE_URL"));
+// $CLEARDB_DATABASE_URL= 'mysql://b52f60921d5f84:750811f1@us-cdbr-iron-east-05.cleardb.net/heroku_db67e7cdc5b1f92?reconnect=true';
+// $cleardb_url      = parse_url($CLEARDB_DATABASE_URL);
 
 return [
 
